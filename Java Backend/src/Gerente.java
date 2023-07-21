@@ -1,24 +1,17 @@
-public class Gerente extends Funcionario {
-    private String clave;
-
-    public String getClave() {
-        return clave;
-    }
-
-    public void setClave(String clave) {
-        this.clave = clave;
-    }
-
+public class Gerente extends Funcionario implements Autenticable {
+    //Sobreescritura de metodo
     public double getBonificacion() {
         System.out.println("Llamando metodo del Gerente");
-        return super.getSalario();
+        return 2000;
     }
 
+    @Override
+    public void setClave(String clave) {
+
+    }
+
+    @Override
     public boolean iniciarSesion(String clave) {
-        if(this.clave == clave) {
-            return true;
-        } else {
-            return false;
-        }
+        return false;
     }
 }
