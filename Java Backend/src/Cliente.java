@@ -3,7 +3,12 @@ public class Cliente implements Autenticable {
     private String nombre;
     private String documento;
     private String telefono;
-    private String clave;
+    private AutenticationUtil util;
+
+    public Cliente() {
+        this.util = new AutenticationUtil();
+
+    }
 
     public String getNombre() {
         return nombre;
@@ -31,7 +36,7 @@ public class Cliente implements Autenticable {
 
     @Override
     public boolean iniciarSesion(String clave) {
-        return this.clave == clave;
+        return this.util.iniciarSesion(clave);
     }
 
     @Override
