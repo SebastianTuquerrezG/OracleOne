@@ -1,5 +1,11 @@
 package co.com.bytebank.modelo;
 
+/**
+ * Cuenta creara instancias de cuenta de ahorros o corriente
+ *
+ * @version 1.0
+ * @author Sebastian Tuquerrez
+ */
 public abstract class Cuenta {
 
     protected double saldo;
@@ -9,10 +15,18 @@ public abstract class Cuenta {
 
     private static int total;
 
+    /**
+     * Instancia una cuenta sin parametros
+     */
     public Cuenta(){
 
     }
 
+    /**
+     * Instancia una cuenta usando la agencia y el numero
+     * @param agencia agencia a la que pertenece
+     * @param numero numero de la cuenta
+     */
     public Cuenta( int agencia, int numero) {
         this.agencia = agencia;
         this.numero = numero;
@@ -23,6 +37,11 @@ public abstract class Cuenta {
 
     public abstract void deposita(double valor);
 
+    /**
+     * Retira un valor de dinero de la cuenta
+     * @param valor
+     * @return true si se pudo retirar el valor
+     */
     public boolean saca(double valor) {
         if(this.saldo >= valor) {
             this.saldo -= valor;
@@ -32,6 +51,12 @@ public abstract class Cuenta {
         }
     }
 
+    /**
+     * Envia un valor de dinero de la cuenta a otra cuenta
+     * @param valor
+     * @param destino
+     * @return
+     */
     public boolean transfiere(double valor, Cuenta destino) {
         if(this.saldo >= valor) {
             this.saca(valor);
