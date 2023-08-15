@@ -1,3 +1,8 @@
+package co.com.bytebank.test;
+
+import co.com.bytebank.modelo.Funcionario;
+import co.com.bytebank.modelo.Gerente;
+
 public class TestReferencia {
     public static void main(String[] args) {
 

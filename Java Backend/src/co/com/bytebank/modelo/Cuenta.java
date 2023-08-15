@@ -1,3 +1,5 @@
+package co.com.bytebank.modelo;
+
 public abstract class Cuenta {
 
     protected double saldo;

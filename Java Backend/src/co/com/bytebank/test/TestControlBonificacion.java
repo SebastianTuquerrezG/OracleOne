@@ -1,3 +1,10 @@
+package co.com.bytebank.test;
+
+import co.com.bytebank.modelo.Contador;
+import co.com.bytebank.modelo.ControlBonificacion;
+import co.com.bytebank.modelo.Funcionario;
+import co.com.bytebank.modelo.Gerente;
+
 public class TestControlBonificacion {
     public static void main(String[] args) {
         Funcionario diego = new Contador();

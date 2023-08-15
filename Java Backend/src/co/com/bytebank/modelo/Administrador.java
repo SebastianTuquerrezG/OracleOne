@@ -1,3 +1,5 @@
+package co.com.bytebank.modelo;
+
 public class Administrador extends Funcionario implements Autenticable {
     private AutenticationUtil util;
 

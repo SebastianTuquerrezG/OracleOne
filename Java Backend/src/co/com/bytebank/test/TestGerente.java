@@ -1,8 +1,10 @@
+package co.com.bytebank.test;
+
 public class TestGerente {
     public static void main(String[] args) {
-        //Gerente gerente = new Gerente();
+        //co.com.bytebank.modelo.Gerente gerente = new co.com.bytebank.modelo.Gerente();
         // gerente.setSalario(5000);
-        // Funcionario gerente = new Funcionario();
+        // co.com.bytebank.modelo.Funcionario gerente = new co.com.bytebank.modelo.Funcionario();
         //gerente.setSalario(6000);
         //gerente.setClave("AluraCursosOnLine");
         //gerente.setTipo(1);

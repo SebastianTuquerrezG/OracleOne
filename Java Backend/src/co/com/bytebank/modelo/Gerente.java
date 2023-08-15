@@ -1,7 +1,9 @@
+package co.com.bytebank.modelo;
+
 public class Gerente extends Funcionario implements Autenticable {
     //Sobreescritura de metodo
     public double getBonificacion() {
-        System.out.println("Llamando metodo del Gerente");
+        System.out.println("Llamando metodo del co.com.bytebank.modelo.Gerente");
         return 2000;
     }
 
