@@ -1,14 +1,14 @@
 package co.com.bytebank.modelo;
 
 /**
- * Cuenta creara instancias de cuenta de ahorros o corriente
+ * @brief Cuenta creara instancias de cuenta de ahorros o corriente
  *
  * @version 1.0
  * @author Sebastian Tuquerrez
  */
-public abstract class Cuenta {
+public abstract class Cuenta implements Comparable<Cuenta> {
 
-    protected double saldo;
+    protected double saldo = 0;
     private int agencia = 1;
     private int numero;
     private Cliente titular = new Cliente();
@@ -16,7 +16,7 @@ public abstract class Cuenta {
     private static int total;
 
     /**
-     * Instancia una cuenta sin parametros
+     * @brief Instancia una cuenta sin parametros
      */
     public Cuenta(){
 
@@ -35,6 +35,10 @@ public abstract class Cuenta {
         Cuenta.total ++;
     }
 
+    /**
+     * @brief Retorna el saldo de la cuenta
+     * @param valor
+     */
     public abstract void deposita(double valor);
 
     /**
@@ -52,7 +56,7 @@ public abstract class Cuenta {
     }
 
     /**
-     * Envia un valor de dinero de la cuenta a otra cuenta
+     * @brief Envia un valor de dinero de la cuenta a otra cuenta
      * @param valor
      * @param destino
      * @return
@@ -103,4 +107,26 @@ public abstract class Cuenta {
         return Cuenta.total;
     }
 
+    @Override
+    public String toString() {
+        String cuenta = "Numero: " + this.numero + ", Agencia:" + this.agencia
+                + ", Titular: " + this.titular.getNombre();
+        return cuenta;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        // Basada en valores
+        Cuenta cuenta = (Cuenta) obj;
+        return this.agencia == cuenta.getAgencia() &&
+                this.numero == cuenta.getNumero();
+    }
+
+    @Override
+    public int compareTo(Cuenta o) {
+        // Orden natural: Numero Agencia
+        //return Integer.compare(this.agencia, o.getAgencia());
+        // Orden natural: Saldo
+        return Double.compare(this.getSaldo(), o.getSaldo());
+    }
 }

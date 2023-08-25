@@ -1,5 +1,8 @@
 package co.com.bytebank.modelo;
 
+/**
+ * @brief Cuenta creara instancias de cuenta de ahorros o corriente
+ */
 public class CuentaCorriente extends Cuenta {
     public CuentaCorriente( int agencia, int numero) {
         super(agencia, numero);

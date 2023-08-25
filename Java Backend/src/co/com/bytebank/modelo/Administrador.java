@@ -1,5 +1,10 @@
 package co.com.bytebank.modelo;
 
+/**
+ * @brief  Administrador complementa los metodos para un funcionario y permite la autentificacion del admin
+ * @author Sebastian Tuquerrez
+ * @version 1.0
+ */
 public class Administrador extends Funcionario implements Autenticable {
     private AutenticationUtil util;
 

@@ -1,5 +1,11 @@
 package co.com.bytebank.modelo;
 
+/**
+ * @brief Crea instancias de un cliente, el cual puede autenticarse
+ *
+ * @author Sebastian Tuquerrez
+ * @version 1.0
+ */
 public class Cliente implements Autenticable {
 
     private String nombre;
@@ -7,6 +13,9 @@ public class Cliente implements Autenticable {
     private String telefono;
     private AutenticationUtil util;
 
+    /**
+     * Instancia un cliente usando su informacion de autenticacion
+     */
     public Cliente() {
         this.util = new AutenticationUtil();
 

@@ -1,10 +1,17 @@
 package co.com.bytebank.modelo;
 
+/**
+ * @brief Clase abstracta Funcionario
+ * @version 1.0
+ * @author Sebastian Tuquerrez
+ */
 public abstract class Funcionario {
     private String nombre;
     private String documento;
     private double salario;
     private int tipo;
+
+    protected String prueba;
 
     public Funcionario() {
 
