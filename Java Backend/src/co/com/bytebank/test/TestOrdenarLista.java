@@ -47,8 +47,10 @@ public class TestOrdenarLista {
         //Ordenar las cuentas
         //Espera cualquier clase hija de cuenta
         //Comparator <? extend Cuenta> c
-        Comparator<Cuenta> comp = new OrdenarPorNumeroCuenta();
+        //Comparator<Cuenta> comp = new OrdenarPorNumeroCuenta();
+        //lista.sort(comp);
         //lista.sort(new OrdenarPorNumeroCuenta());
+
         lista.sort(new Comparator<Cuenta>() {
             @Override
             public int compare(Cuenta o1, Cuenta o2) {
@@ -70,6 +72,7 @@ public class TestOrdenarLista {
         //lista.sort(new OrdenarPorNombreTitular());
 
         //Forma antigua antes de java 8
+        //Collections.sort(lista, new OrdenarPorNombreTitular()); implementa la interfaz
         Collections.sort(lista, new Comparator<Cuenta>() {
             @Override
             public int compare(Cuenta o1, Cuenta o2) {
@@ -89,6 +92,9 @@ public class TestOrdenarLista {
         for (Cuenta account : lista) {
             System.out.println(account);
         }
+        //lista.forEach(System.out::println);
+        //lambda, el de arriba es mejor
+        lista.forEach(Cuenta -> System.out.println(Cuenta));
     }
 }
 
