@@ -5,7 +5,7 @@ import co.com.bytebank.modelo.CuentaAhorros;
 import co.com.bytebank.modelo.SaldoInsuficienteException;
 
 public class TestCuentaExcepcionSaldo {
-    public static void main(String[] args) {
+    public static void main(String[] args) throws SaldoInsuficienteException {
         Cuenta cuenta = new CuentaAhorros(123, 456);
         cuenta.deposita(210);
         cuenta.getSaldo();

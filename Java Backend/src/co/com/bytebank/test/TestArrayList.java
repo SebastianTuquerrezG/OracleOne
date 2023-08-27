@@ -49,12 +49,10 @@ public class TestArrayList {
             System.out.println(cuenta);
         }
 
+        //Por referencia
         boolean contiene = lista.contains(cc3);
-        // Por valor
         if (contiene) {
-            System.out.println("Si, es igual (equals)");
+            System.out.println("Si, es igual referencia");
         }
-
-
     }
 }
