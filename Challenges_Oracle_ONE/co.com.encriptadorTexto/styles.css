@@ -1,0 +1,16 @@
+ul {
+    list-style-type: none;
+    display: flex;
+    gap: 20px;
+}
+
+.aluralogo{
+    width: 120px;
+    height: 48px;
+}
+
+.unicaucalogo{
+    width: 65px;
+    height: auto;
+    margin-top: -5px;
+}
