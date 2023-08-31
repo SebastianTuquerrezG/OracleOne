@@ -1,5 +1,7 @@
 const textToEncrypt = document.getElementById("noEncrypt")
 const textEncrypt = document.getElementById("encrypt")
+const copyButton = document.getElementById('copybtn')
+const imageContainer = document.getElementById('imgcopy')
 
 // La letra "e" es convertida para "enter"
 // La letra "i" es convertida para "imes"
@@ -42,9 +44,36 @@ const decrypt = (stringDecrypt) => {
 const btnEncrypt = () => {
     const noEncrypt = encrypt(textToEncrypt.value)
     textEncrypt.value = noEncrypt;
+    textToEncrypt.value = "";
+    textEncrypt.style.backgroundImage = "none"
 }
 
 const btnDecrypt = () => {
     const encrypt = decrypt(textEncrypt.value)
     textToEncrypt.value = encrypt;
+    textEncrypt.value = "";
 }
+
+textEncrypt.addEventListener('focus', function() {
+    textEncrypt.style.backgroundImage = 'none';
+});
+        
+textEncrypt.addEventListener('blur', function() {
+    textEncrypt.style.backgroundImage = "url('./img/searchcharacterencrypt.png')";
+});
+
+copyButton.addEventListener('click', function() {
+    textEncrypt.select();
+    textEncrypt.setSelectionRange(0, 99999); 
+    document.execCommand('copy');
+
+    copyButton.textContent = 'Copied!';
+    setTimeout(function() {
+        copyButton.textContent = 'Copy to Clipboard';
+    }, 1500);
+
+    setTimeout(function() {
+        
+        copyButton.textContent = "Copy"
+    }, 3000);
+});
