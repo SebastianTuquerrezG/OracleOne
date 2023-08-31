@@ -1,3 +1,7 @@
+:root{
+    --color-background-footer: #44749d;
+}
+
 *{
     font-family: 'Poppins', sans-serif;
     font-style: normal;
@@ -165,13 +169,19 @@
     color: white;
 }
 
-header{
-    justify-content: center;
+a{
+    text-decoration: none;
+    color: white;
+}
+
+a:hover{
+    color: black;
 }
 
 main{
     display: flex;
-    margin-bottom: 50px;
+    margin-top: -50px;
+    margin-bottom: 10px;
     margin-left: 80px;
     justify-content: center;
 }
@@ -180,5 +190,27 @@ footer{
     color: #fff;
     padding: 20px;
     text-align: center;
-    background-color: #f3f5ff;
+    background-color: var(--color-background-footer);
+    align-items:center;
+}
+
+.icons-social{
+    width: 40px;
+    height: auto;
+    background-color: var(--color-background-footer);
+}
+
+.license-politic,
+.license-politic a,
+.social-icons,
+.credits,
+.credits a{
+    background-color: var(--color-background-footer);
+    font-size: 15px;
+}
+
+.watermark{
+    width: 200px;
+    border-radius: 24px;
+    background-color: var(--color-background-footer);
 }
