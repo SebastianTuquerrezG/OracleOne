@@ -21,18 +21,18 @@
     </header>
     <main>
         <section class="encrypt-section">
-            <textarea class="text-to-encrypt" id="" cols="30" rows="10" placeholder="Text to Encrypt "></textarea>
+            <textarea class="text-to-encrypt" id="noEncrypt" cols="30" rows="10" placeholder="Text to Encrypt "></textarea>
             <div class="warningtext">
                 <p class="info"><img class="warninglogue" src="./img/warninglogue.png" alt=""/>Lowercase letter only, no accents </p>
             </div>
             <div class="buttons">
-                <button class="btn-encrypter">Encrypt</button>
-                <button class="btn-decryptor">Decrypt</button>
+                <button class="btn-encrypter" onclick="btnEncrypt()">Encrypt</button>
+                <button class="btn-decryptor" onclick="btnDecrypt()">Decrypt</button>
             </div>
         </section>
         <section class="decrypt-section">
             <div class="encrypt">
-                <textarea class="text-encrypt" name="" id="" cols="30" rows="10"></textarea>
+                <textarea class="text-encrypt" name="" id="encrypt" cols="30" rows="10"></textarea>
             </div>
                 <button class="btn-copy"><img class="img-copy" src="./img/copyicon.png" alt=""></button>
         </section>
@@ -50,5 +50,6 @@
         </div>
         <p class="credits">Developed by: <a href="https://github.com/SebastianTuquerrezG/OracleOne" target="_blank">SebasGX</a></p>
     </footer>
+    <script src="./main.js"></script>
 </body>
 </html>
