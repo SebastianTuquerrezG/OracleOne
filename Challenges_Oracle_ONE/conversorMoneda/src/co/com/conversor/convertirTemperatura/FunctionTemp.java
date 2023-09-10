@@ -6,40 +6,57 @@ public class FunctionTemp {
 
     ConvertirTemperatura temp = new ConvertirTemperatura();
 
-    public void convertirTemperatura() {
-        String opcion = (JOptionPane.showInputDialog(null,
-                "Elige la moneda a la que desea convertir: ",
-                "Monedas", JOptionPane.PLAIN_MESSAGE, null,
-                new Object[]{"De Celsius a Fahrenheit",
-                        "De Celsius a Kelvin",
-                        "De Fahrenheit a Celsius",
-                        "De Fahrenheit a Kelvin",
-                        "De Kelvin a Celsius",
-                        "De Kelvin a Fahrenheit"},
-                "Seleccion")).toString();
+    public void convertirTemperatura(double cantidad, String opcionTemp){
+        switch (opcionTemp) {
+            case "Celsius":
+                String opcioneCelsius = (JOptionPane.showInputDialog(null,
+                        "Seleccione una opción:",
+                        "Menu",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new Object[]{"Convertir Celsius a Fahrenheit",
+                                "Convertir Celsius a Kelvin"},
+                        "Seleccion")).toString();
 
-        String cantidad = JOptionPane.showInputDialog("Ingrese la cantidad a convertir: ");
-
-        switch (opcion) {
-            case "De Celsius a Fahrenheit":
-                temp.ConvertirCelsiusAFahrenheit(0);
+                if (opcioneCelsius.equals("Convertir Celsius a Fahrenheit")) {
+                    temp.ConvertirCelsiusAFahrenheit(cantidad);
+                } else if (opcioneCelsius.equals("Convertir Celsius a Kelvin")) {
+                    temp.ConvertirCelsiusAKelvin(cantidad);
+                }
                 break;
-            case "De Celsius a Kelvin":
-                temp.ConvertirCelsiusAKelvin(0);
+            case "Kelvin":
+                String opcioneKelvin = (JOptionPane.showInputDialog(null,
+                        "Seleccione una opción:",
+                        "Menu",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new Object[]{"Convertir Kelvin a Celsius",
+                                "Convertir Kelvin a Fahrenheit"},
+                        "Seleccion")).toString();
+                if (opcioneKelvin.equals("Convertir Kelvin a Celsius")) {
+                    temp.ConvertirKelvinACelsius(cantidad);
+                } else if (opcioneKelvin.equals("Convertir Kelvin a Fahrenheit")) {
+                    temp.ConvertirKelvinAFahrenheit(cantidad);
+                }
                 break;
-            case "De Fahrenheit a Celsius":
-                temp.ConvertirFahrenheitACelsius(0);
-                break;
-            case "De Fahrenheit a Kelvin":
-                temp.ConvertirFahrenheitAKelvin(0);
-                break;
-            case "De Kelvin a Celsius":
-                temp.ConvertirKelvinACelsius(0);
-                break;
-            case "De Kelvin a Fahrenheit":
-                temp.ConvertirKelvinAFahrenheit(0);
+            case "Fahrenheit":
+                String opcioneFahrenheit = (JOptionPane.showInputDialog(null,
+                        "Seleccione una opción:",
+                        "Menu",
+                        JOptionPane.QUESTION_MESSAGE,
+                        null,
+                        new Object[]{"Convertir Fahrenheit a Celsius",
+                                "Convertir Fahrenheit a Kelvin"},
+                        "Seleccion")).toString();
+                if (opcioneFahrenheit.equals("Convertir Fahrenheit a Celsius")) {
+                    temp.ConvertirFahrenheitACelsius(cantidad);
+                } else if (opcioneFahrenheit.equals("Convertir Fahrenheit a Kelvin")) {
+                    temp.ConvertirFahrenheitAKelvin(cantidad);
+                }
                 break;
             default:
+                JOptionPane.showMessageDialog(null, "Opción no válida");
+                break;
         }
     }
 }

@@ -45,42 +45,25 @@ public class Principal {
                             "Menu",
                             JOptionPane.QUESTION_MESSAGE,
                             null,
-                            new Object[]{"Celsius",
-                                    "Fahrenheit",
-                                    "Kelvin"},
+                            new Object[]{"Convertir Celsius",
+                                    "Convertir Fahrenheit",
+                                    "Convertir Kelvin"},
                             "Seleccion")).toString();
 
-                    switch (temps) {
-                        case "Celsius":
-                            String cels = JOptionPane.showInputDialog(null,
-                                    "Opcion: ",
-                                    "Menu",
-                                    JOptionPane.QUESTION_MESSAGE,
-                                    null,
-                                    new Object[]{"Celsius a Fahrenheit",
-                                    "Celsius a Kelvin"},
-                                    "Seleccion").toString();
+                    String input3 = JOptionPane.showInputDialog("Ingrese la cantidad a convertir: ");
 
-                            String inputtemp = JOptionPane.showInputDialog("Ingrese la cantidad a convertir: ");
-
-                            switch (cels) {
-                                case "Celsius a Fahrenheit":
-                                    temp.convertirTemperatura();
-                                    break;
-                                case "Celsius a Kelvin":
-                                    temp.convertirTemperatura();
-                            }
-                            //monedas.convertirTemperatura();
-                            break;
-                        case "Fahrenheit":
-                            //monedas.convertirTemperatura();
-                            break;
-                        case "Kelvin":
-                            //monedas.convertirTemperatura();
-                            break;
-                        default:
-                            JOptionPane.showMessageDialog(null, "Opción no válida");
-                            break;
+                    if(validarNumero(input3)){
+                        double miInput3 = Double.parseDouble(input3);
+                        switch (temps){
+                            case "Convertir Celsius":
+                                temp.convertirTemperatura(miInput3, "Celsius");
+                                break;
+                            case "Convertir Fahrenheit":
+                                temp.convertirTemperatura(miInput3, "Fahrenheit");
+                                break;
+                            case "Convertir Kelvin":
+                                temp.convertirTemperatura(miInput3, "Kelvin");
+                                break;}
                     }
                     break;
                 case "Salir":
