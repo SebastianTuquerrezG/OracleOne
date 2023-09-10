@@ -2,7 +2,7 @@ package co.com.conversor.convertirTemperatura;
 
 import javax.swing.*;
 
-public class Function {
+public class FunctionTemp {
 
     ConvertirTemperatura temp = new ConvertirTemperatura();
 

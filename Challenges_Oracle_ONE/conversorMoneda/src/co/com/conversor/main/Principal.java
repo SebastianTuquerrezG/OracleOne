@@ -2,16 +2,28 @@ package co.com.conversor.main;
 
 import javax.swing.*;
 
-import co.com.conversor.convertirMoneda.Function;
+import co.com.conversor.convertirMoneda.FunctionCoin;
+import co.com.conversor.convertirTemperatura.FunctionTemp;
 
 public class Principal {
     public static void main(String[] args) {
-        Function monedas = new Function();
+        FunctionCoin monedas = new FunctionCoin();
+
+        FunctionTemp temp = new FunctionTemp();
 
         boolean flag = true;
 
         while (flag) {
-            String opciones = (JOptionPane.showInputDialog(null, "Seleccione una opción:", "Menu", JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Convertir Pesos a Moneda Extranjera", "Convertir Moneda Extranjera a Pesos", "Convertir Temperaturas"}, "Seleccion")).toString();
+            String opciones = (JOptionPane.showInputDialog(null,
+                    "Seleccione una opción:",
+                    "Menu",
+                    JOptionPane.QUESTION_MESSAGE,
+                    null,
+                    new Object[]{"Convertir Pesos a Moneda Extranjera",
+                            "Convertir Moneda Extranjera a Pesos",
+                            "Convertir Temperaturas",
+                            "Salir"},
+                    "Seleccion")).toString();
 
             switch (opciones) {
                 case "Convertir Pesos a Moneda Extranjera":
@@ -28,9 +40,36 @@ public class Principal {
                         monedas.convertirMonedaAPesos(miInput2);
                     }
                 case "Convertir Temperaturas":
-                    String temps = (JOptionPane.showInputDialog(null, "Seleccione una opción:", "Menu", JOptionPane.QUESTION_MESSAGE, null, new Object[]{"Celsius", "Fahrenheit", "Kelvin"}, "Seleccion")).toString();
+                    String temps = (JOptionPane.showInputDialog(null,
+                            "Seleccione una opción:",
+                            "Menu",
+                            JOptionPane.QUESTION_MESSAGE,
+                            null,
+                            new Object[]{"Celsius",
+                                    "Fahrenheit",
+                                    "Kelvin"},
+                            "Seleccion")).toString();
+
                     switch (temps) {
                         case "Celsius":
+                            String cels = JOptionPane.showInputDialog(null,
+                                    "Opcion: ",
+                                    "Menu",
+                                    JOptionPane.QUESTION_MESSAGE,
+                                    null,
+                                    new Object[]{"Celsius a Fahrenheit",
+                                    "Celsius a Kelvin"},
+                                    "Seleccion").toString();
+
+                            String inputtemp = JOptionPane.showInputDialog("Ingrese la cantidad a convertir: ");
+
+                            switch (cels) {
+                                case "Celsius a Fahrenheit":
+                                    temp.convertirTemperatura();
+                                    break;
+                                case "Celsius a Kelvin":
+                                    temp.convertirTemperatura();
+                            }
                             //monedas.convertirTemperatura();
                             break;
                         case "Fahrenheit":
@@ -43,6 +82,12 @@ public class Principal {
                             JOptionPane.showMessageDialog(null, "Opción no válida");
                             break;
                     }
+                    break;
+                case "Salir":
+                    flag = false;
+                    break;
+                default:
+                    JOptionPane.showMessageDialog(null, "Opción no válida");
                     break;
             }
         }

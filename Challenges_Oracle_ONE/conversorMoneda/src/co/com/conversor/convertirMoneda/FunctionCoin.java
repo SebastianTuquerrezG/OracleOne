@@ -2,7 +2,7 @@ package co.com.conversor.convertirMoneda;
 
 import javax.swing.*;
 
-public class Function {
+public class FunctionCoin {
     ConvertirMonedas monedas = new ConvertirMonedas();
     ConvertirMonedasAPesos monedasAPesos = new ConvertirMonedasAPesos();
 
@@ -44,6 +44,7 @@ public class Function {
                 "Elige la moneda a la que desea convertir: ",
                 "Monedas", JOptionPane.PLAIN_MESSAGE, null,
                 new Object[]{"De dolares a Pesos",
+                        "De Euros a Pesos",
                         "De Libras Esterlinas a Pesos",
                         "De Yen Japones a Pesos",
                         "De Won Sul Coreano a Pesos"},
