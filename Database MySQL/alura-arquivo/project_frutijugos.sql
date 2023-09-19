@@ -83,4 +83,19 @@ DELETE FROM product WHERE ID = 23;
 
 ALTER TABLE client ADD COLUMN (birthday_date  DATE);
 
+INSERT INTO `CLIENT` (`ID_CARD`, `NAME`, `ADDRESS_1`, `ADDRESS_2`, `NEIGHBORHOOD`, `CITY`, `STATE`, `POSTAL_CODE`, `BIRTHDAY_DATE`, `AGE`, `GENRE`, `CREDIT_LIMIT`, `VOLUME_BUY`, `FIRST_BUY`) VALUES
+	('9283760794', 'Edson Calisaya', 'Sta Úrsula Xitla', 'no aplica', 'Barrio del Niño Jesús', 'Ciudad de México', 'CDMX', '22002002', '1995-10-07', '25', 'M', '150000', '250000', 1),
+	('7771579779', 'Marcelo Perez', 'F.C. de Cuernavaca 13', 'no aplica', 'Carola', 'Ciudad de México', 'CDMX', '88202912', '1992-03-25', '29', 'M', '120000', '200000', 1),
+	('5576228758', 'Pedro Olivera', 'Pachuca 75', 'no aplica', 'Condesa', 'Ciudad de México', 'CDMX', '88192029', '1995-11-14', '25', 'F', '70000', '160000', 1),
+	('8502682733', 'Luis Silva', 'Prol. 16 de Septiembre 1156', 'no aplica', 'Contadero', 'Ciudad de México', 'CDMX', '82122020', '1995-10-07', '25', 'M', '110000', '190000', 0),
+	('1471156710', 'Erica Carvajo', 'Heriberto Frías 1107', 'no aplica', 'Del Valle', 'Ciudad de México', 'CDMX', '80012212', '1990-09-01', '30', 'F', '170000', '245000', 0),
+	('3623344710', 'Marcos Rosas', 'Av. Universidad', 'no aplica', 'Del Valle', 'Ciudad de México', 'CDMX', '22002012', '1995-01-13', '26', 'M', '110000', '220000', 1),
+	('50534475787', 'Abel Pintos', 'Carr. México-Toluca 1499', 'no aplica', 'Cuajimalpa', 'Ciudad de México', 'CDMX', '22000212', '1995-09-11', '25', 'M', '170000', '260000', 0),
+	('5840119709', 'Gabriel Roca', 'Eje Central Lázaro Cárdenas 911', 'no aplica', 'Del Valle', 'Ciudad de México', 'CDMX', '80010221', '1985-03-16', '36', 'M', '140000', '210000', 1),
+	('94387575700', 'Walter Soruco', 'Calz. de Tlalpan 2980', 'no aplica', 'Ex Hacienda Coapa', 'Ciudad de México', 'CDMX', '22000201', '1989-06-20', '31', 'M', '60000', '120000', 1),
+	('8719655770', 'Carlos Santivañez', 'Calz. del Hueso 363', 'no aplica', 'Floresta Coyoacán', 'Ciudad de México', 'CDMX', '81192002', '1983-12-20', '37', 'M', '200000', '240000', 0),
+	('5648641702', 'Paolo Mendez', 'Martires de Tacubaya 65', 'no aplica', 'Héroes de Padierna', 'Ciudad de México', 'CDMX', '21002020', '1991-08-30', '29', 'M', '120000', '220000', 0),
+	('492472718', 'Jorge Castro', 'Federal México-Toluca 5690', 'no aplica', 'Locaxco', 'Ciudad de México', 'CDMX', '22012002', '1994-07-19', '26', 'M', '75000', '95000', 1);
+
+SELECT NAME AS NOMBRE FROM CLIENT LIMIT 6;
 
