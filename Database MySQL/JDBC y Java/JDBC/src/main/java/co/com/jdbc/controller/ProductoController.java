@@ -72,7 +72,14 @@ public class ProductoController {
     }
 
     public void guardar(Map<String, String> producto) throws SQLException {
+        String nombre = producto.get("nombre");
+        String descripcion = producto.get("descripcion");
+        Double precio = Double.parseDouble(producto.get("precio"));
+        Integer stock = Integer.parseInt(producto.get("stock"));
+        Integer maxCantidad = 50;
+        
         Connection con = ConnectionFactory.getConexion();
+        con.setAutoCommit(false);
 
         PreparedStatement statement = con.prepareStatement(
                 "INSERT INTO producto "
@@ -80,10 +87,31 @@ public class ProductoController {
                         + "VALUES (?, ?, ?, ?)",
                         Statement.RETURN_GENERATED_KEYS);
 
-        statement.setString(1, producto.get("nombre"));
-        statement.setString(2, producto.get("descripcion"));
-        statement.setDouble(3, Double.parseDouble(producto.get("precio")));
-        statement.setInt(4, Integer.parseInt(producto.get("stock")));
+        try {
+            do{
+                int cantidadParaInsertar = Math.min(stock, maxCantidad);
+
+                ejecutaRegistro(statement, nombre, descripcion, precio, stock);
+
+                stock -= cantidadParaInsertar;
+            }while(stock > 0);
+
+            con.commit();
+        } catch (SQLException e) {
+            con.rollback();
+            throw e;
+        }
+
+        statement.close();
+
+        con.close();
+    }
+
+    private static void ejecutaRegistro(PreparedStatement statement, String nombre, String descripcion, Double precio, Integer stock) throws SQLException {
+        statement.setString(1, nombre);
+        statement.setString(2, descripcion);
+        statement.setDouble(3, precio);
+        statement.setInt(4, stock);
 
         statement.execute();
 
@@ -95,6 +123,6 @@ public class ProductoController {
                     resultSet.getInt(1));
         }
 
-        con.close();
+        resultSet.close();
     }
 }
