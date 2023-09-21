@@ -12,13 +12,21 @@ public class ProductoController {
     public int modificar(String nombre, String descripcion, Integer id, Double precio, Integer stock) throws SQLException {
         Connection connection = ConnectionFactory.getConexion();
 
-        Statement statement = connection.createStatement();
+        PreparedStatement statement = connection.prepareStatement(
+                "UPDATE producto SET "
+                    + "nombre = ?, "
+                    + "descripcion = ?, "
+                    + "precio = ?, "
+                    + "stock = ? "
+                    + "WHERE id_producto = ?");
 
-        statement.execute("UPDATE producto SET nombre = '" + nombre
-                + "', descripcion = '" + descripcion
-                + "', precio = " + precio
-                + ", stock = " + stock
-                + " WHERE id_producto = " + id);
+        statement.setString(1, nombre);
+        statement.setString(2, descripcion);
+        statement.setDouble(3, precio);
+        statement.setInt(4, stock);
+        statement.setInt(5, id);
+
+        statement.execute();
 
         return statement.getUpdateCount();
     }
@@ -26,9 +34,11 @@ public class ProductoController {
     public int eliminar(Integer id) throws SQLException {
         Connection connection = ConnectionFactory.getConexion();
 
-        Statement statement = connection.createStatement();
+        PreparedStatement statement = connection.prepareStatement(
+                "DELETE FROM producto WHERE id_producto = ?");
+        statement.setInt(1, id);
 
-        statement.execute("DELETE FROM producto WHERE id_producto = " + id);
+        statement.execute();
 
         return statement.getUpdateCount();
     }
@@ -36,9 +46,10 @@ public class ProductoController {
     public List<Map<String, String>> listar() throws SQLException {
         Connection connection= ConnectionFactory.getConexion();
 
-        Statement statement = connection.createStatement();
+        PreparedStatement statement = connection.prepareStatement(
+                "SELECT * FROM producto");
 
-        boolean result = statement.execute("SELECT * FROM producto");
+        statement.execute();
 
         ResultSet resultSet = statement.getResultSet();
 
@@ -63,21 +74,25 @@ public class ProductoController {
     public void guardar(Map<String, String> producto) throws SQLException {
         Connection con = ConnectionFactory.getConexion();
 
-        Statement statement = con.createStatement();
+        PreparedStatement statement = con.prepareStatement(
+                "INSERT INTO producto "
+                        + "(nombre, descripcion, precio, stock)"
+                        + "VALUES (?, ?, ?, ?)",
+                        Statement.RETURN_GENERATED_KEYS);
 
-        statement.execute("INSERT INTO producto (nombre, descripcion, precio, stock) VALUES ('"
-                + producto.get("nombre") + "', '"
-                + producto.get("descripcion") + "', "
-                + producto.get("precio") + ", "
-                + producto.get("stock") + ")", Statement.RETURN_GENERATED_KEYS);
+        statement.setString(1, producto.get("nombre"));
+        statement.setString(2, producto.get("descripcion"));
+        statement.setDouble(3, Double.parseDouble(producto.get("precio")));
+        statement.setInt(4, Integer.parseInt(producto.get("stock")));
+
+        statement.execute();
 
         ResultSet resultSet = statement.getGeneratedKeys();
 
         while (resultSet.next()) {
-            System.out.println(
-                    String.format(
-                            "El id generado es: %d" ,
-                            resultSet.getInt(1)));
+            System.out.printf(
+                    "El id generado es: %d%n",
+                    resultSet.getInt(1));
         }
 
         con.close();
