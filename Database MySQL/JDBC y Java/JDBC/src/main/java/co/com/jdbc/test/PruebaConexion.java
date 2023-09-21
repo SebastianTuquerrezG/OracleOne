@@ -7,10 +7,11 @@ import java.sql.SQLException;
 
 public class PruebaConexion {
     public static void main(String[] args) throws SQLException {
-        Connection con = ConnectionFactory.getConexion();
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        final Connection connection = connectionFactory.getConexion();
 
         System.out.println("Conexión exitosa");
 
-        con.close();
+        connection.close();
     }
 }

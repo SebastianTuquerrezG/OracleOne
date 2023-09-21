@@ -10,7 +10,8 @@ import java.util.Map;
 
 public class ProductoController {
     public int modificar(String nombre, String descripcion, Integer id, Double precio, Integer stock) throws SQLException {
-        final Connection connection = ConnectionFactory.getConexion();
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        final Connection connection = connectionFactory.getConexion();
 
         try(connection) {
             final PreparedStatement statement = connection.prepareStatement(
@@ -36,7 +37,8 @@ public class ProductoController {
     }
 
     public int eliminar(Integer id) throws SQLException {
-        final Connection connection = ConnectionFactory.getConexion();
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        final Connection connection = connectionFactory.getConexion();
 
         try(connection) {
             final PreparedStatement statement = connection.prepareStatement(
@@ -52,7 +54,8 @@ public class ProductoController {
     }
 
     public List<Map<String, String>> listar() throws SQLException {
-        final Connection connection= ConnectionFactory.getConexion();
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        final Connection connection = connectionFactory.getConexion();
 
         try(connection) {
             final PreparedStatement statement = connection.prepareStatement(
@@ -86,13 +89,14 @@ public class ProductoController {
         Double precio = Double.parseDouble(producto.get("precio"));
         int stock = Integer.parseInt(producto.get("stock"));
         int maxCantidad = 50;
-        
-        final Connection con = ConnectionFactory.getConexion();
 
-        try(con) {
-            con.setAutoCommit(false);
+        ConnectionFactory connectionFactory = new ConnectionFactory();
+        final Connection connection = connectionFactory.getConexion();
 
-            final PreparedStatement statement = con.prepareStatement(
+        try(connection) {
+            connection.setAutoCommit(false);
+
+            final PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO producto "
                             + "(nombre, descripcion, precio, stock)"
                             + "VALUES (?, ?, ?, ?)",
@@ -107,9 +111,9 @@ public class ProductoController {
                     stock -= cantidadParaInsertar;
                 } while (stock > 0);
 
-                    con.commit();
+                    connection.commit();
             } catch (SQLException e) {
-                con.rollback();
+                connection.rollback();
                 throw e;
             }
         }
