@@ -19,6 +19,7 @@ import javax.swing.table.DefaultTableModel;
 
 import co.com.jdbc.controller.CategoriaController;
 import co.com.jdbc.controller.ProductoController;
+import co.com.jdbc.modelo.Producto;
 
 public class ControlDeStockFrame extends JFrame {
 
@@ -272,11 +273,7 @@ public class ControlDeStockFrame extends JFrame {
             return;
         }
 
-        var producto = new HashMap<String, String>();
-        producto.put("nombre", textoNombre.getText());
-        producto.put("descripcion", textoDescripcion.getText());
-        producto.put("precio", String.valueOf(precioInt));
-        producto.put("stock", String.valueOf(cantidadInt));
+        var producto = new Producto(textoNombre.getText(), textoDescripcion.getText(), precioInt, cantidadInt);
 
         var categoria = (String) comboCategoria.getSelectedItem();
 

@@ -1,6 +1,7 @@
 package co.com.jdbc.controller;
 
 import co.com.jdbc.factory.ConnectionFactory;
+import co.com.jdbc.modelo.Producto;
 
 import java.sql.*;
 import java.util.ArrayList;
@@ -83,12 +84,7 @@ public class ProductoController {
         }
     }
 
-    public void guardar(Map<String, String> producto) throws SQLException {
-        String nombre = producto.get("nombre");
-        String descripcion = producto.get("descripcion");
-        Double precio = Double.parseDouble(producto.get("precio"));
-        int stock = Integer.parseInt(producto.get("stock"));
-        int maxCantidad = 50;
+    public void guardar(Producto producto) throws SQLException {
 
         ConnectionFactory connectionFactory = new ConnectionFactory();
         final Connection connection = connectionFactory.getConexion();
@@ -103,27 +99,21 @@ public class ProductoController {
                     Statement.RETURN_GENERATED_KEYS);
 
             try(statement) {
-                do {
-                    int cantidadParaInsertar = Math.min(stock, maxCantidad);
+                ejecutaRegistro(producto, statement);
 
-                    ejecutaRegistro(statement, nombre, descripcion, precio, stock);
-
-                    stock -= cantidadParaInsertar;
-                } while (stock > 0);
-
-                    connection.commit();
-            } catch (SQLException e) {
+                connection.commit();
+            }
+        } catch (SQLException e) {
                 connection.rollback();
                 throw e;
-            }
         }
     }
 
-    private static void ejecutaRegistro(PreparedStatement statement, String nombre, String descripcion, Double precio, Integer stock) throws SQLException {
-        statement.setString(1, nombre);
-        statement.setString(2, descripcion);
-        statement.setDouble(3, precio);
-        statement.setInt(4, stock);
+    private static void ejecutaRegistro(Producto producto, PreparedStatement statement) throws SQLException {
+        statement.setString(1, producto.getNombre());
+        statement.setString(2, producto.getDescripcion());
+        statement.setDouble(3, producto.getPrecio());
+        statement.setInt(4, producto.getStock());
 
         statement.execute();
 
@@ -131,9 +121,13 @@ public class ProductoController {
 
         try(resultSet){
             while (resultSet.next()) {
+                producto.setIdProducto(resultSet.getInt(1));
                 System.out.printf(
-                        "El id generado es: %d%n",
-                        resultSet.getInt(1));
+                        String.format(
+                        "Se ha insertado el producto: %s%n",
+                        producto
+                    )
+                );
             }
         }
     }
