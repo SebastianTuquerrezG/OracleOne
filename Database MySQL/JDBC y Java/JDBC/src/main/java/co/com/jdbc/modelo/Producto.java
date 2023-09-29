@@ -1,5 +1,7 @@
 package co.com.jdbc.modelo;
 
+import co.com.jdbc.dao.ProductoDAO;
+
 public class Producto {
 
     private int idProducto;
@@ -49,6 +51,14 @@ public class Producto {
     }
 
     public Producto(String nombre, String descripcion, double precio, int stock) {
+        this.nombre = nombre;
+        this.descripcion = descripcion;
+        this.precio = precio;
+        this.stock = stock;
+    }
+
+    public Producto(int idProducto, String nombre, String descripcion, double precio, int stock) {
+        this.idProducto = idProducto;
         this.nombre = nombre;
         this.descripcion = descripcion;
         this.precio = precio;

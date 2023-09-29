@@ -16,5 +16,9 @@ public class PruebaDelete {
         statement.execute("DELETE FROM producto WHERE id_producto = 99");
 
         System.out.println(statement.getUpdateCount());
+
+        statement.close();
+
+        connection.close();
     }
 }
