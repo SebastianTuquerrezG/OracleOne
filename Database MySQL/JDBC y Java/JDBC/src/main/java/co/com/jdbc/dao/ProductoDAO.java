@@ -1,5 +1,6 @@
 package co.com.jdbc.dao;
 
+import co.com.jdbc.modelo.Categoria;
 import co.com.jdbc.modelo.Producto;
 
 import java.sql.*;
@@ -19,8 +20,8 @@ public class ProductoDAO {
 
             final PreparedStatement statement = connection.prepareStatement(
                     "INSERT INTO producto "
-                            + "(nombre, descripcion, precio, stock)"
-                            + "VALUES (?, ?, ?, ?)",
+                            + "(nombre, descripcion, precio, stock, id_categoria)"
+                            + "VALUES (?, ?, ?, ?, ?)",
                     Statement.RETURN_GENERATED_KEYS);
 
             try(statement) {
@@ -36,6 +37,7 @@ public class ProductoDAO {
         statement.setString(2, producto.getDescripcion());
         statement.setDouble(3, producto.getPrecio());
         statement.setInt(4, producto.getStock());
+        statement.setInt(5, producto.getCategoriaID());
 
         statement.execute();
 
@@ -123,5 +125,37 @@ public class ProductoDAO {
         } catch (Exception e) {
             throw new RuntimeException(e);
         }
+    }
+
+    public List<Producto> listar(Categoria idCategoria) {
+        List<Producto> productos = new ArrayList<>();
+
+        try(connection) {
+            final PreparedStatement statement = connection.prepareStatement(
+                    "SELECT * FROM producto"
+                            + " WHERE id_categoria = ?");
+
+            try(statement) {
+                statement.setInt(1, idCategoria.getIdCategoria());
+                statement.execute();
+
+                final ResultSet resultSet = statement.getResultSet();
+
+                try(resultSet) {
+                    while (resultSet.next()) {
+                        productos.add(new Producto(
+                                resultSet.getInt("id_producto"),
+                                resultSet.getString("nombre"),
+                                resultSet.getString("descripcion"),
+                                resultSet.getDouble("precio"),
+                                resultSet.getInt("stock")
+                        ));
+                    }
+                }
+            }
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return productos;
     }
 }

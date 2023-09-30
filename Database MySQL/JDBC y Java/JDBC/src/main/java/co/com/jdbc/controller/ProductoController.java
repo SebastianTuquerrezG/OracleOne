@@ -1,6 +1,7 @@
 package co.com.jdbc.controller;
 
 import co.com.jdbc.factory.ConnectionFactory;
+import co.com.jdbc.modelo.Categoria;
 import co.com.jdbc.modelo.Producto;
 import co.com.jdbc.dao.ProductoDAO;
 
@@ -24,10 +25,14 @@ public class ProductoController {
 
     public List<Producto> listar(){
         return productoDAO.listar();
-
     }
 
-    public void guardar(Producto producto) {
+    public List<Producto> listar(Categoria idCategoria){
+        return productoDAO.listar(idCategoria);
+    }
+
+    public void guardar(Producto producto, int idCategoria) {
+        producto.setCategoriaID(idCategoria);
         productoDAO.guardar(producto);
     }
 }

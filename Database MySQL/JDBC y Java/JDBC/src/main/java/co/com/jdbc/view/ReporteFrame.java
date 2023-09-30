@@ -7,7 +7,6 @@ import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
 import co.com.jdbc.controller.CategoriaController;
-
 public class ReporteFrame extends JFrame {
 
     private static final long serialVersionUID = 1L;
@@ -16,7 +15,6 @@ public class ReporteFrame extends JFrame {
     private DefaultTableModel modelo;
 
     private CategoriaController categoriaController;
-
     public ReporteFrame(ControlDeStockFrame controlDeStockFrame) {
         super("Reporte de produtos del stock");
 
@@ -43,11 +41,20 @@ public class ReporteFrame extends JFrame {
     }
 
     private void cargaReporte() {
-        var contenido = categoriaController.cargaReporte();
+        var categorias = categoriaController.cargaReporte();
+        
+        categorias.forEach(categoria -> {
+            modelo.addRow(new Object[] {categoria});
+            
+            var productos = categoria.getProductos();
 
-        // TODO
-        contenido.forEach(fila -> modelo
-                .addRow(new Object[] {}));
+            if(productos != null) {
+                modelo.addRow(new Object[] {"", "Nombre", "Precio", "Cantidad"});
+                productos.forEach(producto -> {
+                    modelo.addRow(new Object[] {"", producto.getNombre(), producto.getPrecio(), producto.getCantidad()});
+                });
+            }
+        });
     }
 
 }

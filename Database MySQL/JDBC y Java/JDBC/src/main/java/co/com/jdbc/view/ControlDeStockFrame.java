@@ -18,6 +18,7 @@ import javax.swing.table.DefaultTableModel;
 
 import co.com.jdbc.controller.CategoriaController;
 import co.com.jdbc.controller.ProductoController;
+import co.com.jdbc.modelo.Categoria;
 import co.com.jdbc.modelo.Producto;
 
 public class ControlDeStockFrame extends JFrame {
@@ -27,7 +28,7 @@ public class ControlDeStockFrame extends JFrame {
 
     private JLabel labelNombre, labelDescripcion, labelPrecio, labelCantidad, labelCategoria;
     private JTextField textoNombre, textoDescripcion, textoPrecio, textoCantidad;
-    private JComboBox<Object> comboCategoria;
+    private JComboBox<Categoria> comboCategoria;
     private JButton botonGuardar, botonModificar, botonLimpiar, botonEliminar, botonReporte;
     private JTable tabla;
     private DefaultTableModel modelo;
@@ -105,11 +106,10 @@ public class ControlDeStockFrame extends JFrame {
         textoPrecio = new JTextField();
         textoCantidad = new JTextField();
         comboCategoria = new JComboBox<>();
-        comboCategoria.addItem("Elige una Categoría");
+        comboCategoria.addItem(new Categoria(0,"Elige una Categoría"));
 
-        // TODO
         var categorias = this.categoriaController.listar();
-        // categorias.forEach(categoria -> comboCategoria.addItem(categoria));
+        categorias.forEach(categoria -> comboCategoria.addItem(categoria));
 
         textoNombre.setBounds(10, 25, 265, 20);
         textoDescripcion.setBounds(10, 65, 265, 20);
@@ -260,10 +260,10 @@ public class ControlDeStockFrame extends JFrame {
                 textoDescripcion.getText(),
                 precioInt, cantidadInt);
 
-        // TODO
-        var categoria = (String) comboCategoria.getSelectedItem();
+        var categoria = (Categoria) comboCategoria.getSelectedItem();
 
-        this.productoController.guardar(producto);
+        assert categoria != null;
+        this.productoController.guardar(producto, categoria.getIdCategoria());
 
         JOptionPane.showMessageDialog(this, "Registrado con éxito!");
 
